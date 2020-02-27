@@ -65,34 +65,17 @@ public class WeightedGraph extends Graph{
 		HashMap<Integer,Integer> skupS=new HashMap<Integer,Integer>();
 		HashMap<Integer,Integer> skupT=new HashMap<Integer,Integer>();
 		skupS.put(1, 0);
-		//List <Pair<Integer,Integer>> skupS=new ArrayList<Pair<Integer,Integer>>();
-		//List <Pair<Integer,Integer>> skupT=new ArrayList<Pair<Integer,Integer>>();
-		//List <Pair> skupT=new ArrayList<Pair>();
-		//Pair parS=new Pair(1,0);
-		//skupS.add(parS);	
 			int cvor=1;
 			for(int i=1;i<6;i++) {
 				cvor++;
 				if(matricaSusjedstva[0][i]==1) {
 					int tezina=tezineBridova[1][cvor-2];
 					skupT.put(cvor,tezina);
-				//	Pair parT=new Pair(cvor,tezina);
-					//skupT.add(parT);
 				}
 				else {
 					skupT.put(cvor,999);
-				//	Pair parT=new Pair(cvor,null);
-				//	skupT.add(parT);
 				}
 			}
-			//while(skupT!=null) {	
-				//Pair parS2 =new Pair(skupT.contains(Collections.min(((Pair<Integer, Integer>) skupT).getValue())));
-				//Pair parS2=new Pair(Collections.min(skupT.get);//(((Pair) skupT).getValue()));
-				//skupS.add(parS2);
-			//}
-			//System.out.println("Skup S: "+Arrays.deepToString(skupS.toArray()));
-			//System.out.println("Skup T: "+Arrays.deepToString(skupT.toArray()));
-			//System.out.println(value);
 			
 			//while(skupT!=null) {
 				Integer min=Collections.min(skupT.values());
@@ -104,12 +87,31 @@ public class WeightedGraph extends Graph{
 				    }
 				}
 				skupT.remove(kljuc,min);
-				for(int i=0;i<6;i++) {
-					if(i!=kljuc-1 && matricaSusjedstva[kljuc][i]==1) {
-						
+				int linija=0;
+				int tezina=0;
+				for(int i=0;i<10;i++) {
+					linija++;
+					if(matricaIncidencije[i][kljuc-1]==1) {					
+						for(int j=0;j<6;j++) {
+							if(matricaIncidencije[i][j]==1 && j!=i) {
+								int tezinaPutanje=0;
+									tezina=tezineBridova[1][linija-1];
+									System.out.println("cvor:"+kljuc +" je povezan sa cvorom: "+(j+1)+" putem linije: "+linija+" tezina "+tezina);								
+									if(matricaSusjedstva[j][kljuc-1]==1) {
+										tezinaPutanje=skupS.get(kljuc)+tezina;
+										System.out.println("if"+tezinaPutanje+"sf"+j);
+										//skupT.put(j+1, skupT.get(j+1)+ tezinaPutanje);
+									}
+									else {
+										tezinaPutanje=999;
+										System.out.println("else"+tezinaPutanje);
+									}
+										//skupT.put(j+1, skupT.get(j+1) + Math.min(tezina,tezinaPutanje ));
+								break;
+							}
+						}
 					}
-				}
-				
+				}				
 			//}
 			System.out.print("Skup S: ");
 			Set set = skupS.entrySet();
