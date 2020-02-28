@@ -6,12 +6,30 @@ import java.util.Scanner;
 public class Graph {
 	
 	public Graph() {
-		System.out.println("Matrica incidencije: ");
+
 		int [][] matricaIncidencije=ucitajMatricuIncidencije();
-		System.out.println("Lista susjedstva: ");
-		listaSusjedstva(matricaIncidencije);
-		System.out.println("Matrica susjedstva: ");
-		matricaSusjedstva(matricaIncidencije);
+		int izbor=0;
+		Scanner ulaz=new Scanner(System.in);
+			do {
+				System.out.println("------------------------------");
+				System.out.println("1. Matrica incidencije.");
+				System.out.println("2. Matrica susjedstva.");
+				System.out.println("3. Lista susjedstva.");
+				System.out.println("9. Izracun puteva.");
+				System.out.print("Izbor:");
+				izbor=ulaz.nextInt();
+				System.out.println("------------------------------");
+				switch(izbor) {
+				case  1 : System.out.println("Matrica incidencije: ");
+							matricaIncidencijeToString(matricaIncidencije);
+					break;
+				case 2: System.out.println("Matrica susjedstva");
+							matricaSusjedstvaToString(matricaSusjedstva(matricaIncidencije));
+					break;
+				case 3: System.out.println("Lista susjedstva: ");
+							listaSusjedstvaToString(matricaIncidencije);
+				}
+			}while(izbor!=9);
 
 	}
 	
@@ -29,11 +47,11 @@ public class Graph {
 					znak[i]=zapis.charAt(i);
 					if(znak[i] !=',' && znak[i]!= ' '){
 						polje[k][j]=Character.getNumericValue(znak[i]);
-						System.out.print(polje[k][j]+" ");
+						//System.out.print(polje[k][j]+" ");
 						k++;
 					}
 					if(znak[i]==' ') {
-						System.out.println();
+						//System.out.println();
 					}
 				}
 				j++;
@@ -45,7 +63,8 @@ public class Graph {
 		return polje;
 	}
 	
-	public void listaSusjedstva(int [][] matricaIncidencije) {
+	//Ispis liste susjedstva
+	public void listaSusjedstvaToString(int [][] matricaIncidencije) {
 		int cvor=0;
 		int cvor1;
 		for(int i=0;i<6;i++) {
@@ -81,12 +100,26 @@ public class Graph {
 				}
 			}
 		}
+		return matricaSusjedstva;
+	}
+	
+	//Ispis matrice susjedstva
+	public void matricaSusjedstvaToString(int [][] polje) {
 		for(int i=0;i<6;i++){
 			for(int j=0;j<6;j++){
-				System.out.print(matricaSusjedstva[j][i]+ " ");
+				System.out.print(polje[j][i]+ " ");
 			}
 			System.out.println();
 		}
-		return matricaSusjedstva;
+	}
+	//Ispis matrice incidencije
+	public void matricaIncidencijeToString(int [][] polje) {
+		for(int i=0;i<6;i++) {
+			for(int j=0;j<10;j++) {
+				System.out.print(polje[j][i]+" ");
+			}
+			System.out.println();
+		}
+		
 	}
 }
