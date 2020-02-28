@@ -131,6 +131,7 @@ public class WeightedGraph extends Graph{
 				}
 				
 			}
+			System.out.println("Put obrnutim redoslijedom");
 			System.out.print("6-");
 			for(int i=skupS.size();i>0;i--) {
 				int tezinaUnutarSkupa=0;
